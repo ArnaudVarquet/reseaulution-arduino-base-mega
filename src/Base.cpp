@@ -105,7 +105,7 @@ bool Base::startupSequence ( ) {
         autoLevelNacelle ();
         debugln (F("Base::startupSequence - Procédure de remise à niveau automatique de la nacelle terminée"));
         // RAZ Offset et encodeur des treuil
-        //setEncodeursNacelle ( );
+        setEncodeursNacelle ( );
         //setOffsetNacelle ( );
         // On lance un retour à la base de la nacelle
         debugln (F("Base::startupSequence - Lancement de la procédure de retour à la station de la nacelle..."));
@@ -665,4 +665,10 @@ boolean Base::getNacelleAngleInfo ( unsigned long timeout ) {
     debug   (received);
     debugln (F("]"));
     return received;
+}
+
+void Base::setEncodeursNacelle ( unsigned int value ) {
+    treuil1.setEncodeur ( value );
+    treuil2.setEncodeur ( value );
+    treuil3.setEncodeur ( value );
 }

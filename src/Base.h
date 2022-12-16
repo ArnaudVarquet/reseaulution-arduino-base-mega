@@ -210,6 +210,12 @@ class Base {
          * @return boolean true si on a eu les informations, false sinon
          */
         boolean getNacelleAngleInfo ( unsigned long timeout = 2000 );
+        /**
+         * @brief Affecte une valeur aux encodeurs des trois treuils
+         * 
+         * @param value valeur des encodeurs
+         */
+        void setEncodeursNacelle ( unsigned int value = 0 );
 
 };
 
