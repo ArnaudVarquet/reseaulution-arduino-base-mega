@@ -48,3 +48,9 @@ void Moteur::reculer ( unsigned int vitesse ) {
     digitalWrite( pinIn2, 0 );
     analogWrite ( pinEn, vitesse );
 }
+
+void Moteur::stop () {
+    digitalWrite ( pinIn1, 1 );
+    digitalWrite ( pinIn2, 1 );
+    analogWrite ( pinEn, 0 );
+}

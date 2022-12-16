@@ -3,28 +3,62 @@
 #include "Debug.h"
 #include "Base.h"
 
-Base base = Base ();
+/* Seuil minimum de pourcentage de la batterie de la nacelle ( 20% ). */
+#define BMS_NACELLE_SEUIL_MIN             20
+/* Seuil minimum de pourcentage de la batterie de la station ( 20% ). */
+#define BMS_BASE_SEUIL_MIN                20
 
+Base base = Base ( );
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// SETUP
 void setup() {
-  /* Initialisation des différents ports série */
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  // Initialisation des différents ports série
   Serial.begin( 115200 );
-
-  /* Lancement de la procédure d'initialisation */
   debugln (F("setup - BEGIN"));
-  /* Initialisation de la base */
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  // Initialisation de la base
   base.setup ();
   attachInterrupt(base.getTreuil1().getPinChA(), interruptTreuil1_CB, RISING);
   attachInterrupt(base.getTreuil2().getPinChA(), interruptTreuil2_CB, RISING);
   attachInterrupt(base.getTreuil3().getPinChA(), interruptTreuil3_CB, RISING);
   attachInterrupt(base.getRoue1().getPinChA(), interruptRoue1_CB, RISING);
-  
 
-  /* Fin de la procédure d'initialisation */
+  if ( !base.startupSequence () ) {
+    while ( 1 ) {
+        debug (".");
+        delay ( 2000 );
+    }
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  // Fin de la procédure d'initialisation
   debugln (F("setup - END"));
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// LOOP
 void loop() {
-  // put your main code here, to run repeatedly:
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  // Vérification des ordres reus sur le port série relié au raspberry
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  // On applique les ordres sur les treuils
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  // On applique les ordres sur les roues
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  // Si les batteries de la base et ou de la nacelle ont atteint le seuil bas, on fait un retour
+  // à la station de chargement
+  if ( base.getBMSInfo().pCentBatt <= BMS_BASE_SEUIL_MIN || false ) {
+    
+    base.dock ();
+  }
 }
 
 

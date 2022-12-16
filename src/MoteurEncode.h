@@ -45,6 +45,30 @@ class MoteurEncode : public Moteur {
          * @brief Gère l'increment ou le decrement de l'encodeur
          */
         void interrupt ();
+        /**
+         * @brief Set the Offset object
+         * 
+         * @param offset valeur de l'offset à affecter
+         */
+        void setOffset ( long offset );
+        /**
+         * @brief Get the Offset object
+         * 
+         * @return long valeur de l'offset
+         */
+        long getOffset ();
+        /**
+         * @brief Set the Encodeur object
+         * 
+         * @param encodeur valeur de l'encodeur à affecter
+         */
+        void setEncodeur ( long encodeur );
+        /**
+         * @brief Get the Encodeur object
+         * 
+         * @return long valeur de l'encodeur
+         */
+        long getEncodeur ();
 
 };
 

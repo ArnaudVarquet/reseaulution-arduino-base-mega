@@ -29,3 +29,19 @@ void MoteurEncode::interrupt () {
         encodeur--;
     }
 }
+
+long MoteurEncode::getEncodeur () {
+    return encodeur;
+}
+
+void MoteurEncode::setEncodeur ( long value ) {
+    encodeur = value;
+}
+
+long MoteurEncode::getOffset () {
+    return offset;
+}
+
+void MoteurEncode::setOffset ( long value ) {
+    offset = value;
+}
